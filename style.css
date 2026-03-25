@@ -82,11 +82,11 @@ header {
 }
 
 .logo-tagline {
-  font-family: var(--font-mono);
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: white;
   margin-top: 4px;
 }
 
@@ -141,7 +141,7 @@ header {
   font-size: 0.65rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: white;
 }
 
 .size-options {

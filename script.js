@@ -2,9 +2,7 @@ let currentSize = 6;
 let currentFormat = 'hex';
 let currentPalette = [];
 
-/* ─────────────────────────────────────────
-   DOM refs
-───────────────────────────────────────── */
+
 const btnGenerate = document.getElementById('btn-generate');
 const paletteGrid = document.getElementById('palette-grid');
 const emptyState = document.getElementById('empty-state');
@@ -15,13 +13,11 @@ const toastContainer = document.getElementById('toast-container');
 const sizeBtns = document.querySelectorAll('.size-btn');
 const formatBtns = document.querySelectorAll('.format-btn');
 
-/* ─────────────────────────────────────────
-   Color generation utilities
-───────────────────────────────────────── */
+
 function randomHSL() {
     const h = Math.floor(Math.random() * 360);
-    const s = Math.floor(30 + Math.random() * 55);   // 30–85% — avoids muddy
-    const l = Math.floor(25 + Math.random() * 50);   // 25–75% — avoids extremes
+    const s = Math.floor(30 + Math.random() * 55);
+    const l = Math.floor(25 + Math.random() * 50);
     return { h, s, l };
 }
 
@@ -47,7 +43,7 @@ function generatePalette(size) {
     });
 }
 
-/* Relative luminance for contrast check */
+
 function hexToLum(hex) {
     const r = parseInt(hex.slice(1, 3), 16) / 255;
     const g = parseInt(hex.slice(3, 5), 16) / 255;
@@ -61,9 +57,7 @@ function textColorFor(hex) {
     return lum > 0.35 ? '#111111' : '#f5f5f5';
 }
 
-/* ─────────────────────────────────────────
-   Render palette
-───────────────────────────────────────── */
+
 function renderPalette(palette, format) {
     paletteGrid.innerHTML = '';
     emptyState.hidden = true;
@@ -109,9 +103,7 @@ function renderPalette(palette, format) {
     });
 }
 
-/* ─────────────────────────────────────────
-   Copy to clipboard
-───────────────────────────────────────── */
+
 async function copyColor(card, value) {
     try {
         await navigator.clipboard.writeText(value);
@@ -124,9 +116,7 @@ async function copyColor(card, value) {
     }
 }
 
-/* ─────────────────────────────────────────
-   Toast system
-───────────────────────────────────────── */
+
 function showToast(message, type = 'info', duration = 2800) {
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
@@ -139,9 +129,6 @@ function showToast(message, type = 'info', duration = 2800) {
     }, duration);
 }
 
-/* ─────────────────────────────────────────
-   Event: Generate
-───────────────────────────────────────── */
 btnGenerate.addEventListener('click', () => {
     btnGenerate.classList.add('loading');
     btnGenerate.textContent = 'Generando…';
@@ -157,9 +144,7 @@ btnGenerate.addEventListener('click', () => {
     }, 220);
 });
 
-/* ─────────────────────────────────────────
-   Event: Size buttons
-───────────────────────────────────────── */
+
 sizeBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         sizeBtns.forEach(b => {
@@ -170,7 +155,6 @@ sizeBtns.forEach(btn => {
         btn.setAttribute('aria-pressed', 'true');
         currentSize = parseInt(btn.dataset.size);
 
-        // Re-render if palette exists
         if (currentPalette.length > 0) {
             currentPalette = generatePalette(currentSize);
             renderPalette(currentPalette, currentFormat);
@@ -179,9 +163,7 @@ sizeBtns.forEach(btn => {
     });
 });
 
-/* ─────────────────────────────────────────
-   Event: Format buttons
-───────────────────────────────────────── */
+
 formatBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         formatBtns.forEach(b => {
@@ -192,7 +174,6 @@ formatBtns.forEach(btn => {
         btn.setAttribute('aria-pressed', 'true');
         currentFormat = btn.dataset.format;
 
-        // Re-render with new format if palette exists
         if (currentPalette.length > 0) {
             renderPalette(currentPalette, currentFormat);
             showToast(`Formato cambiado a ${currentFormat.toUpperCase()}`, 'info');
