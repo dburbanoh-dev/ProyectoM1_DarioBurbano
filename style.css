@@ -5,8 +5,7 @@
   --text-primary: #f0ece4;
   --text-muted: #7a7469;
   --accent: #e8d5b0;
-  --accent-warm: #fde68f;
-  --danger: #e06c6c;
+  --accent-warm: #09eeee;
   --radius-sm: 6px;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -436,12 +435,12 @@ header {
   font-family: var(--font-display);
   font-size: 1.3rem;
   font-style: italic;
-  color: var(--text-muted);
+  color: white;
 }
 
 .empty-sub {
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: white;
 }
 
 #toast-container {
